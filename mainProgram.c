@@ -1017,12 +1017,13 @@ void showMahasiswa(){
 		int a;
 		a=0;
 
-		dataM=head[hashKelas(nim_m)];
+		dataM=head;
 
 		while(dataM!=NULL){
 			if(dataM->nim==nim_m){
 				printf(" --> NIM		: %d\n",dataM->nim);
 				printf(" --> Nama Lengkap 	: %s\n",dataM->nama);
+				printf(" --> Kelas 		: %c\n",dataM->kelas);
 				printf(" --> Jenis Kelamin 	: %s\n",dataM->kelamin);
 				printf(" --> Tanggal Lahir 	: %s\n",dataM->tgl_lahir);
 				printf(" --> Tempat Lahir 	: %s\n",dataM->tempat_lahir);

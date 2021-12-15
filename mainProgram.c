@@ -553,3 +553,371 @@ void tidakLulus(){
 	puts("");
 	printf(" --> Jumlah : %d\n",j);
 }
+
+void NilaiMahasiswa(){
+	int pil;
+	char rep;
+
+	do{
+	system("cls");
+	header();
+	puts("|                     NILAI MAHASISWA                    |");
+	puts("==========================================================");
+    puts(" --> 1. Tampilkan Data");
+    puts(" --> 2. Tambah Data");
+    puts(" --> 3. Rata Rata");
+    puts(" --> 4. Edit Data");
+    puts(" --> 5. Hapus Data");
+    puts(" --> 6. Kembali");
+	puts("==========================================================");
+	printf(" --> Pilihan : ");
+	scanf("%d",&pil);
+	puts("==========================================================");
+
+	switch(pil)
+    {
+        case 1:
+    		dataNilai();
+        break;
+        case 2:
+        	inputNilai();
+    	break;
+    	case 3:
+        	avgAll();
+        break;
+        case 4:
+        	editNilai();
+        break;
+		case 5:
+            hapusNilai();
+        break;
+        case 6:
+            main();
+        break;
+		default :
+			puts(" --> Pilihan tidak tersedia");
+		break;
+    }
+
+    puts("==========================================================");
+	printf(" --> Kembali ke menu sebelumnya ? (y/t) : ");
+	scanf("%s",&rep);
+
+	}while(rep=='y'||rep=='Y');
+}
+
+void dataNilai(){
+
+	struct node *bantu;
+
+		if(head==NULL){
+        	printf(" --> Data Mahasiswa Sedang Kosong\n");
+            return;
+        }
+
+        system("cls");
+        header();
+        puts("|                 DAFTAR NILAI MAHASISWA                 |");
+        puts("==========================================================");
+        bantu=head;
+        while(bantu!=NULL)
+        {
+        	puts("");
+            printf(" -> NIM      : %d\n",bantu->nim);
+            printf(" -> Nama     : %s\n",bantu->nama);
+            printf(" -> UAS      : %.2f\n",bantu->UAS);
+            printf(" -> UTS      : %.2f\n",bantu->UTS);
+            printf(" -> Quiz     : %.2f\n",bantu->quiz);
+            printf(" -> Tugas    : %.2f\n",bantu->tgs);
+
+			printf("\n----------------------\n");
+            bantu=bantu->next;
+        }
+
+}
+
+void inputNilai(){
+
+	int nimN,nimM,x=0;
+	struct node *bantu;
+
+	if(head==NULL){
+        printf(" --> Data Mahasiswa Sedang Kosong\n");
+        return;
+    }
+
+    system("cls");
+    header();
+    puts("|                 INPUT NILAI MAHASISWA                  |");
+    puts("==========================================================");
+    printf(" --> Masukkan NIM : ");
+    scanf("%d",&nimN);
+    puts("==========================================================");
+
+    if(head->nim==nimN){
+        printf(" --> Nama : %s\n",head->nama);
+        printf(" --> Nilai UAS : ");
+        scanf("%f",&head->UAS);
+        printf(" --> Input Nilai UTS : ");
+        scanf("%f",&head->UTS);
+        printf(" --> Input Nilai Quiz : ");
+        scanf("%f",&head->quiz);
+        printf(" --> Input Nilai Tugas : ");
+        scanf("%f",&head->tgs);
+        puts("==========================================================");
+        printf(" --> Data Berhasil Ditambahkan !\n");
+        x=1;
+    }
+    else{
+	    bantu=head;
+	    bantu=bantu->next;
+	    while(bantu!=NULL)
+	    {
+	        if(bantu->nim==nimN){
+	            printf(" --> Nama : %s\n",bantu->nama);
+	            printf(" --> Input Nilai UAS : ");
+	            scanf("%f",&bantu->UAS);
+	            printf(" --> Input Nilai UTS : ");
+	            scanf("%f",&bantu->UTS);
+	            printf(" --> Input Nilai Quiz : ");
+	            scanf("%f",&bantu->quiz);
+	            printf(" --> Input Nilai Tugas : ");
+	            scanf("%f",&bantu->tgs);
+
+	            puts("==========================================================");
+           		printf(" --> Data Berhasil Ditambahkan !\n");
+	            x=1;
+	        }
+	            bantu=bantu->next;
+	        }
+        }
+
+		if(x==0){
+            printf(" --> NIM Tidak ditemukan\n");
+        }
+
+    	avgGrade();
+
+}
+
+void avgAll(){
+
+	avgGrade();
+
+	struct node *bantu;
+	int j,w,ua,ut,qu,tg;
+	float b;
+	float rataAll,rataUAS,rataUTS,rataQuiz,rataTugas;
+
+	if(head==NULL)
+    {
+        printf(" --> Data Mahasiswa Sedang Kosong\n");
+        return;
+    }
+
+    system("cls");
+    header();
+    puts("|                       Rata Rata                        |");
+    puts("|                   Nilai Mahasiswa                      |");
+    puts("==========================================================");
+
+    bantu=head;
+
+	j=0;
+    rataAll=0;
+    b=0,ua=0,ut=0,qu=0,tg=0;
+    while(bantu!=NULL)
+    {
+        bantu->rata=(bantu->UAS+bantu->UTS+bantu->quiz+bantu->tgs)/4;
+
+        printf(" -> %d. %s\tRata Rata : %.2f\tGrade : %c\n",bantu->nim,bantu->nama,bantu->rata,bantu->grade);
+
+        b = b + bantu->rata;
+        ua = ua + bantu->UAS;
+        ut = ut + bantu->UTS;
+        qu = qu + bantu->quiz;
+        tg = tg + bantu->tgs;
+        bantu = bantu->next;
+
+		j++;
+        printf("--------------------------\n");
+    }
+        rataAll= b/(float)j;
+        float rata_rata_max = maxRataRata();
+        float rata_rata_min = minRataRata();
+
+        rataUAS = (float)ua/(float)j;
+        rataUTS = (float)ut/(float)j;
+        rataQuiz = (float)qu/(float)j;
+        rataTugas = (float)tg/(float)j;
+
+
+        puts("");
+        puts("==========================================================");
+        puts(" --> Data Rata-Rata Nilai");
+        puts("==========================================================");
+        printf(" --> Seluruh Mahasiswa 	: %.2f\n",rataAll);
+        printf(" --> Tertinggi 		: %.2f\n",rata_rata_max);
+        printf(" --> Terendah 		: %.2f\n",rata_rata_min);
+        puts("==========================================================");
+        printf(" --> UAS 		: %.2f\n",rataUAS);
+        printf(" --> UTS 		: %.2f\n",rataUTS);
+        printf(" --> Quiz 		: %.2f\n",rataQuiz);
+        printf(" --> Tugas 		: %.2f\n",rataTugas);
+
+}
+
+void editNilai(){
+
+	int nimM;
+	int c;
+
+	struct node *bantu;
+
+	c=0;
+
+	if(head==NULL)
+    {
+    	printf(" --> Data Mahasiswa Sedang Kosong\n");
+    	return;
+    }
+
+    system("cls");
+    header();
+    puts("|                 Update Nilai Mahasiswa                 |");
+    puts("==========================================================");
+    printf(" --> Masukkan NIM : ");
+    scanf("%d",&nimM);
+    puts("==========================================================");
+
+    bantu=head;
+
+    while(bantu!=NULL){
+    	if(bantu->nim==nimM){
+    		c=1;
+    		break;
+		}
+		bantu=bantu->next;
+	}
+
+	if(c==1){
+		printf(" --> Data Nilai Saat Ini\n");
+		puts("==========================================================");
+		printf(" -> Nama  : %s\n",bantu->nama);
+		printf(" -> UAS   : %.3f\n",bantu->UAS);
+		printf(" -> UTS   : %.3f\n",bantu->UTS);
+		printf(" -> Quiz  : %.3f\n",bantu->quiz);
+		printf(" -> Tugas : %.3f\n",bantu->tgs);
+
+	    puts("==========================================================");
+	    printf(" --> Masukan Data Baru\n");
+		puts("==========================================================");
+		printf(" -> Nilai UAS : ");
+		scanf("%f",&bantu->UAS);
+		printf(" -> Nilai UTS : ");
+		scanf("%f",&bantu->UTS);
+		printf(" -> Nilai Quiz : ");
+		scanf("%f",&bantu->quiz);
+		printf(" -> Nilai Tugas : ");
+		scanf("%f",&bantu->tgs);
+		puts("==========================================================");
+		printf(" --> Data Berhasil Di-Update\n");
+	}
+
+    else if(c==0)
+        {
+            printf(" --> NIM Tidak Ditemukan\n");
+        }
+
+    avgGrade();
+
+}
+
+void hapusNilai(){
+
+	if(head==NULL)
+    {
+    	printf(" --> Data Mahasiswa Sedang Kosong\n");
+    	return;
+    }
+
+	struct node *bantu;
+	bantu=head;
+    while(bantu!=NULL)
+    {
+        bantu->UAS=bantu->UTS=bantu->quiz=bantu->tgs=0;
+        bantu=bantu->next;
+    }
+
+    avgGrade();
+
+	printf(" --> Data Nilai Berhasil Dihapus !\n");
+}
+
+float maxRataRata()
+{
+    struct node *bantu=head, *bantu2=head;
+    float max;
+
+    if(head->next==NULL){
+    	return head->rata;
+	}
+
+    while(bantu->next!=NULL)
+        {
+            if(bantu2->rata < bantu->next->rata){
+            	bantu2=bantu->next;
+			}
+            bantu=bantu->next;
+        }
+
+    return bantu2->rata;
+}
+
+float minRataRata()
+{
+    struct node *bantu=head, *bantu2=head;
+    float min;
+
+    if(head->next==NULL){
+    	return head->rata;
+	}
+
+    while(bantu->next!=NULL)
+        {
+            if(bantu2->rata > bantu->next->rata){
+            	bantu2=bantu->next;
+			}
+            bantu=bantu->next;
+        }
+
+    return bantu2->rata;
+}
+
+void avgGrade(){
+	struct node *bantu;
+
+	bantu=head;
+
+	while(bantu!=NULL){
+		bantu->rata=(bantu->UAS+bantu->UTS+bantu->quiz+bantu->tgs)/4;
+
+		if(bantu->rata >= 80 && bantu->rata <= 100)
+		bantu->grade='A';
+
+		else if(bantu->rata <= 80 && bantu->rata >= 70)
+		bantu->grade='B';
+
+		else if(bantu->rata <= 70 && bantu->rata >= 60)
+		bantu->grade='C';
+
+		else if(bantu->rata <= 60 && bantu->rata >=50)
+		bantu->grade='D';
+
+		else if(bantu->rata<50)
+		bantu->grade='E';
+
+		bantu=bantu->next;
+
+	}
+}

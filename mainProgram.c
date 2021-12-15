@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define KELAS 5
 
 int session=-1;
 

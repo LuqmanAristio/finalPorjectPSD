@@ -44,9 +44,55 @@ void dataMhs(int);
 void editDataDiri(int);
 void cekLulus(int);
 
+
 void main(){
 
+	if(session==-1){
+		login();
+	}
 
-	
-return 0;
+	int pil;
+	char rep;
+
+	do{
+	system("cls");
+	header();
+	puts("|                      MAIN MENU                         |");
+	puts("==========================================================");
+	puts(" --> 1. Data Pokok");
+	puts(" --> 2. Nilai");
+	puts(" --> 3. Kelulusan");
+	puts(" --> 4. Log Out");
+	puts(" --> 5. Exit");
+	puts("==========================================================");
+	printf(" --> Pilihan : ");
+	scanf("%d",&pil);
+
+	switch(pil){
+		case 1 :
+			DataMahasiswa();
+		break;
+		case 2 :
+			NilaiMahasiswa();
+		break;
+		case 3 :
+			Kelulusan();
+		break;
+		case 4:
+            login();
+            break;
+        case 5:
+            exit(1);
+            break;
+		default:
+			puts(" --> Pilihan tidak tersedia");
+		break;
+	}
+
+	puts("==========================================================");
+	printf(" --> Kembali ke menu utama ? (y/t) : ");
+	scanf("%s",&rep);
+
+	}while(rep=='y'||rep=='Y');
+	login();
 }

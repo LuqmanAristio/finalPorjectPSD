@@ -103,8 +103,7 @@ void showMahasiswa(){
 
 	struct node *dataM;
 
-
-	if(head == NULL){
+	if(head==NULL){
 		puts("==========================================================");
 		puts(" --> Data Sedang Kosong");
 		return;
@@ -115,19 +114,18 @@ void showMahasiswa(){
 	puts("|               Data Mahasiswa Terkini                   |");
 	puts("==========================================================");
 
-
+	dataM=head;
 	puts("");
 	int count=0;
-        dataM=head;
-        while(dataM!=NULL){
+	while(dataM!=NULL){
 
-            printf(" -> NIM			: %d \n", dataM->nim);
-            printf(" -> Nama Lengkap	: %s \n", dataM->nama);
+		printf(" -> NIM			: %d \n", dataM->nim);
+		printf(" -> Nama Lengkap	: %s \n", dataM->nama);
 
-            printf("\n");
-            count++;
-            dataM=dataM->next;
-        }
+		printf("\n");
+		count++;
+		dataM=dataM->next;
+	}
 
 	printf(" -> Jumlah Data Mahasiswa : %d\n\n",count);
 
@@ -146,12 +144,13 @@ void showMahasiswa(){
 		int a;
 		a=0;
 
-		dataM=head[hashKelas(nim_m)];
+		dataM=head;
 
 		while(dataM!=NULL){
 			if(dataM->nim==nim_m){
 				printf(" --> NIM		: %d\n",dataM->nim);
 				printf(" --> Nama Lengkap 	: %s\n",dataM->nama);
+				printf(" --> Kelas 		: %c\n",dataM->kelas);
 				printf(" --> Jenis Kelamin 	: %s\n",dataM->kelamin);
 				printf(" --> Tanggal Lahir 	: %s\n",dataM->tgl_lahir);
 				printf(" --> Tempat Lahir 	: %s\n",dataM->tempat_lahir);

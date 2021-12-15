@@ -450,3 +450,106 @@ void editMahasiswa(){
 		puts(" --> Data Berhasil Di-Edit");
 	}
 }
+
+void Kelulusan()
+{
+    int pilihan;
+    char rep;
+
+    do{
+
+    system("cls");
+    header();
+    puts("|                Kelulusan Mahasiswa                     |");
+    puts("==========================================================");
+    printf(" --> 1. Informasi Grade dan Nilai\n");
+    printf(" --> 2. Mahasiswa Yang Lulus\n");
+    printf(" --> 3. Mahasiswa Yang Tidak Lulus\n");
+    printf(" --> 4. Kembali\n");
+    puts("==========================================================");
+    printf(" --> Pilihan : ");
+    scanf("%d",&pilihan);
+
+    switch(pilihan)
+    {
+        case 1:
+            infoGrade();
+        break;
+    	case 2:
+            lulus();
+        break;
+        case 3:
+        	tidakLulus();
+        break;
+        case 4:
+        	main();
+        break;
+        default:
+        	puts(" --> Pilihan Tidak Tersedia");
+        break;
+    }
+
+    puts("==========================================================");
+	printf(" --> Kembali ke menu sebelumnya ? (y/t) : ");
+	scanf("%s",&rep);
+
+	}while(rep=='y'||rep=='Y');
+}
+
+void infoGrade(){
+	puts("==========================================================");
+	puts("|                   GRADE MAHASISWA                      |");
+	puts("==========================================================");
+	puts(" --> Grade A untuk Nilai 80 sampai 100");
+	puts(" --> Grade B untuk Nilai 70 sampai 79");
+	puts(" --> Grade C untuk Nilai 60 sampai 69");
+	puts(" --> Grade D untuk Nilai 50 sampai 59");
+	puts(" --> Grade E untuk Nilai 50 Kebawah");
+}
+
+void lulus(){
+
+	struct node *bantu;
+	int j=0;
+	avgGrade();
+
+	puts("==========================================================");
+	puts("|                 MAHASISWA YANG LULUS                   |");
+	puts("==========================================================");
+
+
+	bantu=head;
+
+	while(bantu!=NULL){
+		if(bantu->grade=='A'||bantu->grade=='B'||bantu->grade=='C'){
+			printf(" -> %d. %s\tRata Rata : %.2f\tGrade : %c\n",bantu->nim,bantu->nama,bantu->rata,bantu->grade);
+			j++;
+		}
+		bantu=bantu->next;
+	}
+	puts("");
+	printf(" --> Jumlah : %d\n",j);
+}
+
+void tidakLulus(){
+	struct node *bantu;
+	int j=0;
+	avgGrade();
+
+	puts("==========================================================");
+	puts("|                 MAHASISWA YANG GAGAL                    ");
+	puts("==========================================================");
+
+
+	bantu=head;
+
+	while(bantu!=NULL){
+		if(bantu->grade=='E'||bantu->grade=='D'){
+			printf(" -> %d. %s\tRata Rata : %.2f\tGrade : %c\n",bantu->nim,bantu->nama,bantu->rata,bantu->grade);
+			j++;
+		}
+		bantu=bantu->next;
+	}
+	puts("");
+	printf(" --> Jumlah : %d\n",j);
+}

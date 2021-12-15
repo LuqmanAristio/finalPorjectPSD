@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 int session=-1;
-
+ini aku tambahin lewat branch -aris
 struct node{
 	int nim;
 	char nama[100];

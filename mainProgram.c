@@ -96,3 +96,82 @@ void main(){
 	}while(rep=='y'||rep=='Y');
 	login();
 }
+
+void login(){
+	int cek;
+	char user[100], pass[100];
+	char data[]="admin";
+
+	system("cls");
+
+	header();
+
+
+	puts("|            SILAHKAN LOGIN TERLEBIH DAHULU              |");
+	puts("==========================================================");
+	puts("");
+	printf("     --> Masukan Username : ");
+	fflush(stdin);
+	gets(user);
+
+	printf("     --> Masukan Password : ");
+	fflush(stdin);
+	gets(pass);
+
+	int cekuser=strcmp(user,data);
+	int cekpass=strcmp(pass,data);
+
+	if(cekuser==0 && cekpass==0) {
+		puts("");
+		puts("     --> Login Berhasil!");
+		getch();
+		session=1;
+		main();
+	}
+
+	struct node *bantu;
+	int cekLog;
+	char keep[100];
+
+	bantu=head;
+	cekLog=0;
+
+
+	while(bantu!=NULL && cekLog==0){
+
+		sprintf(keep, "%d", bantu->nim);
+
+		int cekuser=strcmp(user,keep);
+		int cekpass=strcmp(pass,keep);
+
+		if(cekuser==0 && cekpass==0){
+			cekLog=1;
+			break;
+		}
+
+		bantu=bantu->next;
+	}
+
+	if(cekLog==1){
+
+		puts("");
+		puts("     --> Login Berhasil!");
+
+		getch();
+		session=1;
+
+		dataMhs(bantu->nim);
+
+	}
+
+	else{
+
+		puts("");
+		puts("     --> Username / Password Salah");
+
+		getch();
+
+		login();
+	}
+
+}

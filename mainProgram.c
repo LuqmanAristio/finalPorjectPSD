@@ -1075,8 +1075,7 @@ void addMahasiswa(){
 	}
 
 
-	kelas=hashKelas(baru->nim);
-    baru->kelas = ('A' + (hashKelas((baru->nim+4))));
+    	baru->kelas = ('A' + (hashKelas((baru->nim+4))));
 
 	printf(" --> Nama Lengkap : ");
 	fflush(stdin);

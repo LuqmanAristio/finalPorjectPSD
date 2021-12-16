@@ -85,7 +85,7 @@ void main(){
             exit(1);
             break;
 		default:
-			puts(" --> Pilihan tidak tersedia");
+			puts(" --> Pilihan tidak tersedia!");
 		break;
 	}
 

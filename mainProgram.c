@@ -87,7 +87,7 @@ void main(){
             exit(1);
             break;
 		default:
-			puts(" --> Pilihan tidak tersedia");
+			puts(" --> Pilihan tidak tersedia!");
 		break;
 	}
 
@@ -219,7 +219,7 @@ void dataMhs(int nimnya){
 			exit(1);
 		break;
 		default:
-			puts(" --> Pilihan tidak tersedia");
+			puts(" --> Pilihan tidak tersedia ");
 		break;
 	}
 
